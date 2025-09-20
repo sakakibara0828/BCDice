@@ -72,7 +72,18 @@ module BCDice
           return Result.new(translate('SwordWorld.infinite_critical', min_critical: command.min_critical))
         end
 
-        newRates = getNewRates(rate_sw2_0)
+        def getNewRates(rate_sw2_0)
+  newRates = Array.new(13) { Array.new(rate_sw2_0.size, 0) }
+
+  rate_sw2_0.each_with_index do |line, key|
+    values = line.split(",")[1..]  # '*' を除く
+    values.each_with_index do |val, dice|
+      newRates[dice + 3][key] = val.to_i  # 出目3〜12に対応
+    end
+  end
+
+  return newRates
+end
 
         output = "#{command} ＞ "
 
