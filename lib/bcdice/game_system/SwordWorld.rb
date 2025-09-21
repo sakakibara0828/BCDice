@@ -62,8 +62,10 @@ module BCDice
         # 2.0対応
         rate_sw2_0 = getSW2_0_RatingTable
 
-        keyMax = 1000
+        keyMax = rate_sw2_0.size - 1
         debug("keyMax", keyMax)
+debug("rate_sw2_0.size", rate_sw2_0.size)
+debug("keyMax", keyMax)
         if command.rate > keyMax
           return Result.new(translate('SwordWorld.keynumber_exceeds', keyMax: keyMax))
         end
@@ -1172,16 +1174,18 @@ end
 '*,73,107,130,152,178,192,210,225,247,265',
 '*,73,107,130,152,178,192,211,225,248,265',
 # 1000
-'*,73,107,130,152,179,192,211,225,248,266',
+'*,73,107,130,152,179,192,211,225,248,266'
         ]
-
+warn("rate_sw2_0.size: #{rate_sw2_0.size}")
+warn("command.rate: #{command.rate}")
+warn("keyMax: #{keyMax}")
         return rate_sw2_0
       end
 
-        if @rating_table == 1
-          # 完全版準拠に差し替え
-          rate_12[31] = rate_12[32] = rate_12[33] = 10
-        end
+def getNewRates(rate_sw2_0)
+  if @rating_table == 1
+    rate_12[31] = rate_12[32] = rate_12[33] = 10
+  end
 
         newRates = [zeroArray, zeroArray, zeroArray, rate_3, rate_4, rate_5, rate_6, rate_7, rate_8, rate_9, rate_10, rate_11, rate_12]
 

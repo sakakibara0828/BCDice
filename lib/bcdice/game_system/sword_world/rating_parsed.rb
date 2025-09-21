@@ -4,6 +4,8 @@ module BCDice
   module GameSystem
     class SwordWorld < Base
       class RatingParsed
+  attr_reader :rate, :modifier
+
         # @return [Integer]
         attr_accessor :rate
 
