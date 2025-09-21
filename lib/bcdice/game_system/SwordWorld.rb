@@ -40,6 +40,8 @@ module BCDice
       end
 
       def eval_game_system_specific_command(command)
+warn("DEBUG: command.rate = #{command.rate.inspect}")
+warn("DEBUG: keyMax = #{rate_sw2_0.size - 1}")
         rating(command)
       end
 
